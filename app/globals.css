@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #0d1516;
+  --color-surface: #192122;
+  --color-surface-terminal: #080f11;
+  --color-surface-high: #242b2d;
+  --color-surface-bright: #333a3c;
+  --color-primary: #00e5ff;
+  --color-primary-container: #00e5ff;
+  --color-secondary: #ff571a;
+  --color-tertiary: #00f13d;
+  --color-on-surface: #dce4e5;
+  --color-on-surface-variant: #bac9cc;
+  --color-border: #333333;
+  --color-outline: #849396;
+  --color-outline-variant: #3b494c;
+  --font-sans: "Inter", ui-sans-serif, system-ui;
+  --font-mono: "Space Grotesk", ui-monospace, monospace;
+  --radius-none: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-full: 0px;
+}
+
+* {
+  border-radius: 0px !important;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0d1516;
+}
+::-webkit-scrollbar-thumb {
+  background: #333333;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  font-family: "Material Symbols Outlined";
+}
+
+.sharp-chart {
+  clip-path: polygon(0% 80%, 10% 70%, 20% 90%, 30% 40%, 40% 60%, 50% 20%, 60% 50%, 70% 30%, 80% 65%, 90% 10%, 100% 45%, 100% 100%, 0% 100%);
+}
+
+/* Input/textarea resets */
+input, textarea, select {
+  background-color: #080f11;
+  border: 1px solid #333333;
+  color: #dce4e5;
+  padding: 0.5rem 0.75rem;
+  font-family: "Space Grotesk", monospace;
+  font-size: 0.875rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: #00e5ff;
+}
+input::placeholder, textarea::placeholder {
+  color: #849396;
+}
