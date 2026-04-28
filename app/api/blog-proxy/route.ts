@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const BACKEND = process.env.BACKEND_URL ?? "http://localhost:3001";
+const BACKEND = process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3001";
 const API_KEY = process.env.ADMIN_API_KEY ?? "change-me-in-production";
 
 // GET /api/blog-proxy?page=1&per_page=20

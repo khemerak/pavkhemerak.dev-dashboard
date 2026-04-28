@@ -1,4 +1,4 @@
-const BACKEND = process.env.BACKEND_URL ?? "http://localhost:3001";
+const BACKEND = process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3001";
 const API_KEY = process.env.ADMIN_API_KEY ?? "change-me-in-production";
 
 // ── Types ─────────────────────────────────────────────────────

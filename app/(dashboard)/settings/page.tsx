@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { TopBar } from "@/components/TopBar";
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:3001";
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || process.env.BACKEND_URL || "http://localhost:3001";
 
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
