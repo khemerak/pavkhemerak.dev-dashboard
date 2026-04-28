@@ -11,10 +11,8 @@ export default async function EditPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  let post;
-  try {
-    post = await getPost(slug);
-  } catch {
+  const post = await getPost(slug);
+  if (!post) {
     notFound();
   }
 
