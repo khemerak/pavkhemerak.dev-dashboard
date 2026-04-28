@@ -49,9 +49,9 @@ export function PostForm({ initial, mode }: PostFormProps) {
     const payload = {
       ...form,
       tags: form.tags.split(",").map((t) => t.trim()).filter(Boolean),
-      imageUrl: form.imageUrl || undefined,
-      imageAlt: form.imageAlt || undefined,
-      codeSnippet: form.codeSnippet || undefined,
+      imageUrl: form.imageUrl || "",
+      imageAlt: form.imageAlt || "",
+      codeSnippet: form.codeSnippet || "",
     };
 
     try {
