@@ -1,7 +1,42 @@
+"use client";
+
+import { useEffect } from "react";
 import { Sidebar } from "@/components/Sidebar";
 import { TerminalFooter } from "@/components/TerminalFooter";
+import { BrowserLifecycleDetector } from "@/lib/autoLogout";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    // Task 7.1: Initialize detector on page load
+    // Import BrowserLifecycleDetector in dashboard layout
+    // Create detector instance with logout endpoint configuration
+    // Initialize event listeners on component mount
+    // Requirements: 1.1, 1.2
+
+    const detector = new BrowserLifecycleDetector({
+      // Task 7.2: Configure detector settings
+      // Set logoutEndpoint to /api/auth/logout
+      // Enable Beacon API if available
+      // Enable fetch keepalive as fallback
+      // Set debug mode for development
+      // Requirements: 4.4, 6.1
+      logoutEndpoint: "/api/auth/logout",
+      enableBeaconApi: true,
+      enableFetchKeepalive: true,
+      debugMode: process.env.NODE_ENV === "development",
+    });
+
+    detector.init();
+
+    // Task 7.3: Cleanup event listeners on unmount
+    // Destroy detector instance on component unmount
+    // Remove event listeners to prevent memory leaks
+    // Requirements: 1.1
+    return () => {
+      detector.destroy();
+    };
+  }, []);
+
   return (
     <div className="flex min-h-screen">
       <Sidebar />
