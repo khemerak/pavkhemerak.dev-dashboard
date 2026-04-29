@@ -36,6 +36,11 @@ export interface DashboardStats {
   topPosts: { slug: string; title: string; views: number; category: string }[];
 }
 
+export interface PortfolioContentResponse {
+  content: Record<string, unknown> | null;
+  updatedAt: string | null;
+}
+
 export interface CreatePostBody {
   slug: string;
   title: string;
@@ -179,5 +184,32 @@ export async function getDashboardStats(): Promise<DashboardStats> {
   } catch (error) {
     console.error("API_ERROR: getDashboardStats failed", error);
     return defaultStats;
+  }
+}
+
+export async function getPortfolioContent(): Promise<PortfolioContentResponse> {
+  try {
+    const res = await fetch(`${BACKEND}/api/portfolio/content`, { cache: "no-store" });
+    if (!res.ok) return { content: null, updatedAt: null };
+    return res.json();
+  } catch (error) {
+    console.error("API_ERROR: getPortfolioContent failed", error);
+    return { content: null, updatedAt: null };
+  }
+}
+
+export async function updatePortfolioContent(content: Record<string, unknown>): Promise<{ ok: boolean; updatedAt: string | null }> {
+  try {
+    const res = await fetch(`${BACKEND}/api/portfolio/content`, {
+      method: "PUT",
+      headers: adminHeaders(),
+      body: JSON.stringify(content),
+    });
+    if (!res.ok) return { ok: false, updatedAt: null };
+    const data = await res.json();
+    return { ok: Boolean(data?.ok), updatedAt: data?.updatedAt ?? null };
+  } catch (error) {
+    console.error("API_ERROR: updatePortfolioContent failed", error);
+    return { ok: false, updatedAt: null };
   }
 }

@@ -1,34 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# pavkhemerak.dev Dashboard
 
-## Getting Started
+Admin dashboard for managing dynamic content without frontend code edits/redeploys.
 
-First, run the development server:
+## Features
+
+- Blog CMS (create, edit, delete posts)
+- Portfolio CMS JSON editor at `/portfolio`
+- Runtime-safe backend proxy routes (`/api/blog-proxy`, `/api/portfolio-proxy`, `/api/health-proxy`)
+- Session/logout controls for admin access
+
+## Local Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Dashboard runs on `http://localhost:3002` (or your configured Next.js port).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-## Learn More
+| Variable | Description |
+|----------|-------------|
+| `BACKEND_URL` | Rust backend URL (example: `http://localhost:3001`) |
+| `NEXT_PUBLIC_BACKEND_URL` | Optional client-safe backend URL fallback |
+| `ADMIN_API_KEY` | Admin key forwarded by dashboard proxies to protected backend routes |
 
-To learn more about Next.js, take a look at the following resources:
+## Portfolio CMS Flow
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Open `/portfolio` in dashboard.
+2. Edit JSON content for profile, skills, projects, and contact.
+3. Save changes; dashboard sends `PUT /api/portfolio-proxy`.
+4. Proxy forwards to backend `PUT /api/portfolio/content`.
+5. Frontend home page consumes `GET /api/portfolio/content` at runtime.
